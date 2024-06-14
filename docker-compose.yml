@@ -1,0 +1,25 @@
+services:
+  ms1:
+    image: ms1:v1.0.5
+    environment:
+      - USER_DB=${USER_DB}
+      - PASS_DB=${PASS_DB}
+      - URL_DB=${URL_DB}
+      - NAME_DB=${NAME_DB}
+    networks:
+      - mired
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ms1.rule=Host(`ms1.client.localhost`)"
+      - "traefik.http.routers.ms1.tls=true"
+      - "traefik.http.services.ms1.loadbalancer.server.port=5000"
+      - "traefik.docker.network=mired"
+      - "traefik.http.middlewares.ms1.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+      - "traefik.http.middlewares.ms1.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+      - "traefik.http.middlewares.ms1.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+   # ports:
+    #  - "5000:5000"
+
+networks:
+  mired:
+    external: true
