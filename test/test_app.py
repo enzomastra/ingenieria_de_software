@@ -1,20 +1,11 @@
+import requests
 import unittest
-from flask import current_app
-from app import create_app
-
 
 class AppTestCase(unittest.TestCase):
-
-    def setUp(self):
-        self.app = create_app()
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-
-    def tearDown(self):
-        self.app_context.pop()
-
     def test_app(self):
-        self.assertIsNotNone(current_app)
+        url = "http://ms1.client.localhost/api/v1/"
+        response = requests.get(url, verify=False)
+        self.assertEqual(response.status_code, 200)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

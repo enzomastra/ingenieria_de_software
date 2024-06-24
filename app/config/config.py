@@ -27,6 +27,10 @@ class ProductionConfig(Config):
     def init_app(cls, app):
         Config.init_app(app)
 
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://enzo:1234@postgresql:5432/postgres'  # URL de tu base de datos de prueba
+
 def factory(app):
     configuration = {
         'development': DevelopmentConfig,

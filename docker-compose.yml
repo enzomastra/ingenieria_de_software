@@ -1,6 +1,8 @@
 services:
   ms1:
-    image: ms1:v1.0.5
+    image: ms1:v1.0.6
+    # volumes:
+    #   - migrations_data:/path/inside/container
     environment:
       - USER_DB=${USER_DB}
       - PASS_DB=${PASS_DB}
@@ -8,6 +10,8 @@ services:
       - NAME_DB=${NAME_DB}
     networks:
       - mired
+    # deploy:
+    #   replicas: 3
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ms1.rule=Host(`ms1.client.localhost`)"
@@ -23,3 +27,11 @@ services:
 networks:
   mired:
     external: true
+
+# volumes:
+#       migrations_data:
+#         driver: local
+#         driver_opts:
+#           type: none
+#           o: bind
+#           device: ../migrations

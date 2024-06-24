@@ -5,11 +5,11 @@ ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 ENV PATH=$PATH:/home/flaskapp/.local/bin
 
-RUN useradd --create-home --home-dir /home/flaskapp lord
+RUN useradd --create-home --home-dir /home/flaskapp enz
 
 WORKDIR /home/flaskapp
 
-USER lord
+USER enz
 RUN mkdir app
 
 COPY ./app ./app
