@@ -7,7 +7,11 @@ from dotenv import load_dotenv
 class TestRedis(unittest.TestCase):
     def setUp(self):
         load_dotenv()
-        self.redis = redis.Redis(host='redis', port=6379, db=0, password=os.getenv('REDIS_PASSWORD'))
+        self.redis = redis.Redis(
+            host=os.getenv("REDIS_HOST"), 
+            port=os.getenv("REDIS_PORT"), 
+            db=os.getenv("REDIS_DB"), 
+            password=os.getenv('REDIS_PASSWORD'))
         self.redis.flushdb()
 
     def tearDown(self):

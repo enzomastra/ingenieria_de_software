@@ -15,8 +15,8 @@ class DatabaseTestCase(unittest.TestCase):
             user=os.getenv("USER_DB"),
             password=os.getenv("PASS_DB"),
             database=os.getenv("NAME_DB"),
-            host='ms1.client.localhost',
-            port=5432
+            host=os.getenv("HOST"),
+            port=os.getenv("PORT_DB")
         )
         self.cursor = self.connection.cursor()
 

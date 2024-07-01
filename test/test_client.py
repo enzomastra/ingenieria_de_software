@@ -23,10 +23,7 @@ class ClientTestCase(unittest.TestCase):
         self.app_context.push()
         db.create_all()
 
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-        self.app_context.pop()
+    
 
         
     def create_entity(self):

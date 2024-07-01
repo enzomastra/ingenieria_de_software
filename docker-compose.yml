@@ -1,6 +1,6 @@
 services:
   ms1:
-    image: ms1:v1.0.6
+    image: ms1:v1.0.7 
     # volumes:
     #   - migrations_data:/path/inside/container
     environment:
